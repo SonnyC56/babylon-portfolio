@@ -9,6 +9,7 @@ import { HavokPlugin } from "@babylonjs/core/Physics/v2/Plugins/havokPlugin";
 import HavokPhysics from "@babylonjs/havok";
 
 import MainScene from "./playground/main-scene";
+import PlayerControllerScene from "./playground/player-controller";
 
 class App {
   public engine: Engine | WebGPUEngine;
@@ -40,6 +41,20 @@ class App {
 
     // Add physics. If not needed, you can annotate it to improve loading speed and environment performance.
     await this._setPhysics();
+    
+
+    // Show debug layer on Ctrl+I
+    window.addEventListener("keydown", (ev) => {
+      if ((ev.ctrlKey || ev.metaKey) && ev.keyCode === 73) {
+        if (this.scene.debugLayer.isVisible()) {
+          this.scene.debugLayer.hide();
+        } else {
+          this.scene.debugLayer.show({ embedMode: true });
+        }
+        ev.preventDefault(); // Prevent default browser behavior
+      }
+    });
+    
 
     new MainScene(this.scene, this.canvas, this.engine);
 
@@ -60,7 +75,20 @@ class App {
     // Add physics. If not needed, you can annotate it to improve loading speed and environment performance.
     await this._setPhysics();
 
-    new MainScene(this.scene, this.canvas, this.engine);
+        // Show debug layer on Ctrl+I
+    window.addEventListener("keydown", (ev) => {
+      if ((ev.ctrlKey || ev.metaKey) && ev.keyCode === 73) {
+        if (this.scene.debugLayer.isVisible()) {
+          this.scene.debugLayer.hide();
+        } else {
+          this.scene.debugLayer.show({ embedMode: false });
+        }
+        ev.preventDefault(); // Prevent default browser behavior
+      }
+    });
+
+
+    new PlayerControllerScene(this.scene, this.canvas, this.engine);
 
     this._config();
     this._renderer();
