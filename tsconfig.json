@@ -12,7 +12,7 @@
         "module": "ESNext", // use the latest ECMA/JavaScript syntax for our import statements and such
         "moduleResolution": "node", // ensures we are using CommonJS for our npm packages
         "noResolve": false, // disable TypeScript from automatically detecting/adding files based on import statements and etc (it's less helpful than you think)
-        "isolatedModules": true, // allows our code to be processed by other transpilers, such as preventing non-module TS files (you could delete this since we're only using base TypeScript)
+        "isolatedModules": false, // Set to false - might interfere with module augmentation needed for MeshBuilder side-effects
         "removeComments": true, // remove comments from our outputted code to save on space (look into terser if you want to protect the outputted JS even more)
         "esModuleInterop": true, // treats non-ES6 modules separately from ES6 modules (helpful if module: "ESNext")
         "noImplicitAny": false, // usually prevents code from using "any" type fallbacks to prevent untraceable JS errors, but we'll need this disabled for our example code
